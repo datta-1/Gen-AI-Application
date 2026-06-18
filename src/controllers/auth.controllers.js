@@ -8,8 +8,6 @@ const Blacklistmodel = require("../models/blacklist.model");
  * @desc Register a new user,expects username,email and password in the request body
  * @access Public
  */
-
-
 async function registerUsercontroller(req, res) {
   const { username, email, password } = req.body;
   if (!username || !email || !password) {
@@ -95,4 +93,21 @@ async function logoutUsercontroller(req, res) {
   res.status(200).json({ message: "User logged out successfully" });
 }
 
-module.exports = { registerUsercontroller, loginUsercontroller, logoutUsercontroller };
+/**
+ * @name getMecontroller
+ * @desc Get the profile of the logged-in user
+ * @access Private
+ */
+async function getMecontroller(req, res) {
+  const user = await Usermodel.findById(req.user.id);
+  res.status(200).json({
+    message: "User profile fetched successfully",
+    user: {
+      id: user._id,
+      username: user.username,
+      email: user.email,
+    },
+  });
+}
+
+module.exports = { registerUsercontroller, loginUsercontroller, logoutUsercontroller, getMecontroller };

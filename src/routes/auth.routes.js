@@ -1,5 +1,6 @@
 const {Router}=require("express")
 const authcontrollers=require("../controllers/auth.controllers")
+const authmiddleware=require("../middlewares/auth.middleware")
 
 const authRoutes=Router()
 /**
@@ -22,6 +23,13 @@ authRoutes.post("/login", authcontrollers.loginUsercontroller)
 *@access Public
 */
 authRoutes.get("/logout", authcontrollers.logoutUsercontroller)
+
+/**
+*@route GET /api/auth/get-me
+*@desc Get the profile of the logged-in user
+*@access Private
+*/
+authRoutes.get("/get-me", authmiddleware.authuser, authcontrollers.getMecontroller)
 
 
 
