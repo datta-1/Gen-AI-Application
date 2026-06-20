@@ -1,6 +1,7 @@
 import React from 'react'
 import "../auth.form.scss"
-import { useNavigate,useState } from 'react-router';
+import { useNavigate } from 'react-router';
+import { useState } from 'react';
 import {useAuth} from "../hooks/useAuth.js"
 
 
