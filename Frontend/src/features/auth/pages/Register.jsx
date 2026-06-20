@@ -28,9 +28,8 @@ const Register = () => {
             <button className='button primary-button' type="submit">Register</button>
         </form>
         <p>Already have an account? <span className='link' onClick={() => navigate("/login")}>Login</span></p>
-        
-      </div>
 
+      </div>
     </main>
 
   )

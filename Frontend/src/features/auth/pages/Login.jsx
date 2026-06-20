@@ -1,16 +1,22 @@
 import React from 'react'
 import "../auth.form.scss"
-import { useNavigate } from 'react-router';
+import { useNavigate,useState } from 'react-router';
+import {useAuth} from "../hooks/useAuth.js"
 
 
 
 const Login = () => {
+    
+    const {loading,handleLogin} = useAuth()
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
 
-    const handleSubmit = (e) => {
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
+        handleLogin({email, password})
     }
     const navigate = useNavigate();
-
 
   return (
     <main>
@@ -19,17 +25,21 @@ const Login = () => {
         <form onSubmit={handleSubmit}>
             <div className="input-group">
                 <label htmlFor="email">Email</label>
-                <input type="email" id="email" name='email' placeholder="Enter Email Address"/>
+                <input 
+                onChange={(e) => setEmail(e.target.value)}
+                type="email" id="email" name='email' placeholder="Enter Email Address"/>
             </div>
             <div className="input-group">
                 <label htmlFor="password">Password</label>
-                <input type="password" id="password" name='password' placeholder="Enter Password"/>
+                <input 
+                onChange={(e) => setPassword(e.target.value)}
+                type="password" id="password" name='password' placeholder="Enter Password"/>
             </div>
             <button className='button primary-button' type="submit">Login</button>
         </form>
-      </div>
-      <p>Don't have an account? <span className='link' onClick={() => navigate("/register")}>Register</span></p>
+        <p>Don't have an account? <span className='link' onClick={() => navigate("/register")}>Register</span></p>
 
+      </div>
     </main>
   )
 }
