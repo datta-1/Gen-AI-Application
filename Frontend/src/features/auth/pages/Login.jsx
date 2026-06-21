@@ -11,13 +11,29 @@ const Login = () => {
     const {loading,handleLogin} = useAuth()
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const [error, setError] = useState("");
 
 
     const handleSubmit = async (e) => {
-        e.preventDefault();
-        handleLogin({email, password})
+    e.preventDefault();
+
+    try {
+        const success = await handleLogin({
+            email,
+            password,
+        });
+
+        if (success) {
+            navigate("/");
+        }
+    } catch (err) {
+        setError("Invalid email or password");
     }
+};
     const navigate = useNavigate();
+    if(loading){
+        return <div>Loading...</div>
+    }
 
   return (
     <main>
