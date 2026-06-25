@@ -2,6 +2,7 @@ require("dotenv").config()
 
 const app=require("./src/app")
 const connectDB=require("./src/config/database")
+const invokeGeminiai=require("./src/services/ai.service")
 
 connectDB()
 
